@@ -10,7 +10,6 @@
   выполнить на этом интерфейсе
 
 Проверить работу функции на примере словаря trunk_config и шаблона trunk_mode_template.
-
 Пример итогового словаря, который должна возвращать функция (перевод строки
 после каждого элемента сделан для удобства чтения):
 {
@@ -47,3 +46,14 @@ trunk_config = {
     "FastEthernet0/2": [11, 30],
     "FastEthernet0/4": [17],
 }
+
+def generate_trunk_config(intf_vlan_mapping, access_template): 
+    for i in intf_vlan_mapping.keys():
+        restr = access_template[1]
+        if i !=1:
+            access_template[2] +=  " " + str(intf_vlan_mapping[i])
+        thisdict = dict.fromkeys(trunk_config.keys(), access_template[2])
+    print(i,end = '/n')
+    print(*access_template, sep = "/n")
+    access_template[1] = restr
+generate_trunk_config(trunk_config, trunk_mode_template)
