@@ -23,3 +23,24 @@
 а не ввод пользователя.
 
 """
+import re
+def get_ip_from_cfg(config):
+	indexes = []
+	f = open(config).read()
+	all1 = [i for i in range(len(f)) if f.startswith("address 10", i)]
+	
+	ip1 = f[all1[0]+8:all1[0]+16]
+	mask1 = f[all1[0]+17:all1[0]+32]
+	
+	ip2 = f[all1[1]+8:all1[1]+17]
+	mask2 = f[all1[1]+18:all1[1]+31]
+	
+	ip3 = f[all1[2]+8:all1[2]+17]
+	mask3 = f[all1[2]+18:all1[2]+31]
+	
+	kort1 = tuple((ip1,mask1))
+	kort2 = tuple((ip2,mask2))
+	kort3 = tuple((ip3,mask3))
+	spis = [kort1,kort2,kort3]
+	print(spis)
+get_ip_from_cfg("config_r1.txt")
